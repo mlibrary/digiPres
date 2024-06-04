@@ -1,0 +1,207 @@
+head
+  meta(charset='utf-8')
+  title Metadata Form
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css')
+  // adding script
+  script(type='text/javascript', src='/javascripts/script.js')
+  // this file allows us to write to and download a txt file in Chrome
+  script(src="http://danml.com/js/download.js")
+  body
+    p
+    .modal-dialog
+        .modal-content
+          // Modal Header
+          .modal-header
+            h4#myModalLabel.modal-title
+              | Metadata Form
+            br
+            p
+              | last edited by Abby Sypniewski on 5/30/2024
+          // this is the metadata form
+          .modal-body
+            form(role='form' id="dataForm" method='GET')
+              div.form-group
+                label(for='BarcodeNumberIdentifier') BarcodeNumberIdentifier:
+                input#BarcodeNumberIdentifier.form-control(type='text', name='BarcodeNumberIdentifier')
+              div.form-group
+                label(for='AlternateID') AlternateID:
+                input#AlternateID.form-control(type='text', name='AlternateID')
+              div.form-group
+                label(for='AccessionNumberCollection') AccessionNumberCollection:
+                input#AccessionNumberCollection.form-control(type='text', name='AccessionNumberCollection')
+              div.form-group
+                label(for='OriginatingUnitDepartment') OriginatingUnitDepartment:
+                input#OriginatingUnitDepartment.form-control(type='text', name='OriginatingUnitDepartment')
+              div.form-group
+                label(for='MediaRetentionPriority') MediaRetentionPriority:
+                select#MediaRetentionPriority.form-control(type='text', name='MediaRetentionPriority')
+                  option(value="") #{""}
+                  option(value="Low") #{"Low"}
+                  option(value="High") #{"High"} 
+              div.form-group
+                label(for='RecordsLabel') RecordsLabel:
+                input#RecordsLabel.form-control(type='text', name='RecordsLabel')
+              div.form-group
+                label(for='MediumCarrier') MediumCarrier:
+                select#MediumCarrier.form-control(type='text', name='MediumCarrier')
+                  option(value="") #{""}
+                  option(value="CD") #{"CD"}
+                  option(value="Blu-Ray") #{"Blu-Ray"} 
+                  option(value="HDD/Hard-Drive") #{"HDD/Hard-Drive"}  
+                  option(value="USB: Flash/Thumb-Drive") #{"USB: Flash/Thumb-Drive"}  
+                  option(value="Floppy: 3.5in") #{"Floppy: 3.5in"}  
+                  option(value="Floppy 3.5in (400k)") #{"Floppy 3.5in (400k)"} 
+                  option(value="Floppy 3.5in (800k)") #{"Floppy 3.5in (800k)"}
+                  option(value="Floppy 5.25in") #{"Floppy 5.25in"}
+                  option(value="Floppy 8in") #{"Floppy 8in"}          
+                  option(value="Zip Disk") #{"Zip Disk"}
+                  option(value="Jazz Drive") #{"Jazz Drive"}
+                  option(value="Tape/Disk Cartridge") #{"Tape/Disk Cartridge"}
+                  option(value="Memory Card (SD/HC/XC/UHS/MS PRO/PRO Duo/Compact Flash/etc.)") #{"Memory Card (SD/HC/XC/UHS/MS PRO/PRO Duo/Compact Flash/etc.)"}
+                  option(value="CMagneto-Optical Disc (1990s)D") #{"Magneto-Optical Disc (1990s)"}
+                  option(value="Mobile Device (Phone/Tablet/etc.)") #{"Mobile Device (Phone/Tablet/etc.)"}
+                  option(value="Computer") #{"Computer"}
+                  option(value="Folder on Computer") #{"Folder on Computer"}
+                  option(value="Email/Attachment") #{"Email/Attachment"}
+                  option(value="Content Systems (RMS/DMS/RDMS/CMS Repository)") #{"Content Systems (RMS/DMS/RDMS/CMS Repository)"}
+                  option(value="Network Storage (NAS/SAN/FTP/SFTP)") #{"Network Storage (NAS/SAN/FTP/SFTP)"}
+                  option(value="Cloud Storage") #{"Cloud Storage"}
+                  option(value="Other(Describe in notes)") #{"Other(Describe in notes)"}
+              div.form-group
+                label(for='MediumCarrierConditionNotes') MediumCarrierConditionNotes:
+                input#MediumCarrierConditionNotes.form-control(type='text', name='MediumCarrierConditionNotes')
+              div.form-group
+                label(for='MediumCarrierDetails') MediumCarrierDetails:
+                input#MediumCarrierDetails.form-control(type='text', name='MediumCarrierDetails')
+              div.form-group
+                label(for='MediumCarrier2') MediumCarrier2:
+                select#MediumCarrier2.form-control(type='text', name='MediumCarrier2')
+                  option(value="") #{""}
+                  option(value="CD") #{"CD"}
+                  option(value="Blu-Ray") #{"Blu-Ray"} 
+                  option(value="HDD/Hard-Drive") #{"HDD/Hard-Drive"}  
+                  option(value="USB: Flash/Thumb-Drive") #{"USB: Flash/Thumb-Drive"}  
+                  option(value="Floppy: 3.5in") #{"Floppy: 3.5in"}  
+                  option(value="Floppy 3.5in (400k)") #{"Floppy 3.5in (400k)"} 
+                  option(value="Floppy 3.5in (800k)") #{"Floppy 3.5in (800k)"}
+                  option(value="Floppy 5.25in") #{"Floppy 5.25in"}
+                  option(value="Floppy 8in") #{"Floppy 8in"}          
+                  option(value="Zip Disk") #{"Zip Disk"}
+                  option(value="Jazz Drive") #{"Jazz Drive"}
+                  option(value="Tape/Disk Cartridge") #{"Tape/Disk Cartridge"}
+                  option(value="Memory Card (SD/HC/XC/UHS/MS PRO/PRO Duo/Compact Flash/etc.)") #{"Memory Card (SD/HC/XC/UHS/MS PRO/PRO Duo/Compact Flash/etc.)"}
+                  option(value="CMagneto-Optical Disc (1990s)D") #{"Magneto-Optical Disc (1990s)"}
+                  option(value="Mobile Device (Phone/Tablet/etc.)") #{"Mobile Device (Phone/Tablet/etc.)"}
+                  option(value="Computer") #{"Computer"}
+                  option(value="Folder on Computer") #{"Folder on Computer"}
+                  option(value="Email/Attachment") #{"Email/Attachment"}
+                  option(value="Content Systems (RMS/DMS/RDMS/CMS Repository)") #{"Content Systems (RMS/DMS/RDMS/CMS Repository)"}
+                  option(value="Network Storage (NAS/SAN/FTP/SFTP)") #{"Network Storage (NAS/SAN/FTP/SFTP)"}
+                  option(value="Cloud Storage") #{"Cloud Storage"}
+                  option(value="Other(Describe in notes)") #{"Other(Describe in notes)"}
+              div.form-group
+                label(for='MediumCarrierConditionNotes2') MediumCarrierConditionNotes2:
+                input#MediumCarrierConditionNotes2.form-control(type='text', name='MediumCarrierConditionNotes2')
+              div.form-group
+                label(for='MediumCarrierDetails2') MediumCarrierDetails2:
+                input#MediumCarrierDetails2.form-control(type='text', name='MediumCarrierDetails2')
+              div.form-group
+                label(for='Hardware') Hardware:
+                select#Hardware.form-control(type='text', name='Hardware')
+                  option(value="") #{""}
+                  option(value="External 3.5in Floppy Reader") #{"External 3.5in Floppy Reader"}
+                  option(value="Internal 3.5in Floppy Reader on vintage machine") #{"Internal 3.5in Floppy Reader on vintage machine"} 
+                  option(value="Internal Optical Drive") #{"Internal Optical Drive"}  
+                  option(value="USB via WriteBlocker") #{"USB via WriteBlocker"}  
+                  option(value="Direct USB") #{"Direct USB"}  
+                  option(value="File Hosting Service") #{"File Hosting Service"} 
+                  option(value="5.25in Floppy Reader via FC5025") #{"5.25in Floppy Reader via FC5025"}
+                  option(value="KryoFlux") #{"KryoFlux"}
+              div.form-group
+                label(for='Software') Software:
+                select#Software.form-control(type='text', name='Software')
+                  option(value="") #{""}
+                  option(value="Guymager") #{"Guymager"}
+                  option(value="FTK Imager") #{"FTK Imager"}
+                  option(value="Data Accessioner") #{"Data Accessioner"}
+                  option(value="Disc Copy on vintage machine") #{"Disc Copy on vintage machine"}
+                  option(value="Iomegaware") #{"Iomegaware"}
+                  option(value="FC5025 Disk Image and Browse") #{"FC5025 Disk Image and Browse"}
+                  option(value="KryoFlux Host Software") #{"KryoFlux Host Software"}
+                  option(value="Other - see Notes field") #{"Other - see Notes field"}
+              div.form-group
+                label(for='WriteBlockerHardware') WriteBlockerHardware:
+                select#WriteBlockerHardware.form-control(type='text', name='WriteBlockerHardware')
+                  option(value="") #{""}
+                  option(value="Tableau USB Bridge") #{"Tableau USB Bridge"}
+                  option(value="Tableau FireWire Bridge") #{"Tableau FireWire Bridge"}
+                  option(value="Floppy Disk Write Protect") #{"Floppy Disk Write Protect"}
+                  option(value="Read-Only Optical Disc") #{"Read-Only Optical Disc"}
+                  option(value="Not Applicable") #{"Not Applicable"}
+              div.form-group
+                label(for='WriteBlockerSoftware') WriteBlockerSoftware:
+                select#WriteBlockerSoftware.form-control(type='text', name='WriteBlockerSoftware')
+                  option(value="") #{""}
+                  option(value="Active") #{"Active"}
+                  option(value="Not active") #{"Not active"}
+              div.form-group
+                label(for='VirusCheckRun') VirusCheckRun:
+                select#VirusCheckRun.form-control(type='text', name='VirusCheckRun')
+                  option(value="") #{""}
+                  option(value="Yes") #{"Yes"}
+                  option(value="No") #{"No"}
+                  option(value="Could not run") #{"Could not run"}
+              div.form-group
+                label(for='VirusCheckSoftware') VirusCheckSoftware:
+                select#VirusCheckSoftware.form-control(type='text', name='VirusCheckSoftware')
+                  option(value="") #{""}
+                  option(value="Clam AV") #{"Clam AV"}
+                  option(value="Clam Tk") #{"Clam Tk"}
+                  option(value="Microsoft System Center Endpoint Protection") #{"Microsoft System Center Endpoint Protection"}
+                  option(value="Windows Defender") #{"Windows Defender"}
+              div.form-group
+                label(for='VirusCheckResults') VirusCheckResults:
+                select#VirusCheckResults.form-control(type='text', name='VirusCheckResults')
+                  option(value="") #{""}
+                  option(value="Pass") #{"Pass"}
+                  option(value="Fail") #{"Fail"}
+              div.form-group
+                label(for='VirusCheckResultsNotes') VirusCheckResultsNotes:
+                input#VirusCheckResultsNotes.form-control(type='text', name='VirusCheckResultsNotes')
+              div.form-group
+                label(for='TestMountPerformed') TestMountPerformed:
+                select#TestMountPerformed.form-control(type='text', name='TestMountPerformed')
+                  option(value="") #{""}
+                  option(value="Yes") #{"Yes"}
+                  option(value="No") #{"No"}
+                  option(value="Image quarantined") #{"Image quarantined"}
+              div.form-group
+                label(for='TestMountResults') TestMountResults:
+                select#TestMountResults.form-control(type='text', name='TestMountResults')
+                  option(value="") #{""}
+                  option(value="Successful") #{"Successful"}
+                  option(value="Unsuccessful") #{"Unsuccessful"}
+              div.form-group
+                label(for='BagContent') BagContent:
+                select#BagContent.form-control(type='text', name='BagContent')
+                  option(value="") #{""}
+                  option(value="Disk Image/Forensic Image") #{"Disk Image/Forensic Image"}
+                  option(value="Logical Transfer") #{"Logical Transfer"}
+                  option(value="Stream Files") #{"Stream Files"}
+              div.form-group
+                label(for='Notes') Notes:
+                input#Notes.form-control(type='text', name='Notes')
+              div.form-group
+                label(for='ItemInformationNotes') ItemInformationNotes:
+                input#ItemInformationNotes.form-control(type='text', name='ItemInformationNotes')
+              div.form-group
+                label(for='BagCreator') BagCreator:
+                input#BagCreator.form-control(type='text', name='ItemIBagCreatornformationNotes')
+
+              // when user clicks on submit, calls convertToJson() in javascripts/script.py
+              button.btn.btn-primary(type="button", onclick="convertToJson()" name="asdf") Submit
+          // Modal Footer
+          .modal-footer
+
+    // footer
+    p.foot.text-xs-center
