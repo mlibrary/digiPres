@@ -35,11 +35,11 @@ Instructions adapted and synthesized from [Installing Node.js on Windows](https:
 14. Open the **Metadata_Form** directory in VS Code.
 
 ## Step 2: Edit index.pug and script.js files
-1. Copy and paste the code from **index.pug** into your own generated **index.pug** file. This builds the content of the form; edit as needed to adapt to your needs.
+1. Copy and paste the code from [index.pug](https://github.com/mlibrary/digiPres/blob/main/DigiArch/views/index.pug) into your own generated **index.pug** file. This builds the content of the form; edit as needed to adapt to your needs.
 
 ![Screenshot of new index.pug content pasted in](https://github.com/user-attachments/assets/bbed45a6-8760-4bef-b80c-9dbcf69ff698)
 
-3. Then, download and add **script.js** into your own **public -> javascripts** folder. This is the code that will turn your form's output into a JSON object and generate a metadata.txt file.
+3. Then, download and add [script.js](https://github.com/mlibrary/digiPres/blob/main/DigiArch/public/javascripts/script.js) into your own **public -> javascripts** folder. This is the code that will turn your form's output into a JSON object and generate a metadata.txt file.
 
 ![Screenshot of script.js in pubic/javascripts folder](https://github.com/user-attachments/assets/4be73353-5131-405e-b3de-50d1b03c0122)
 
