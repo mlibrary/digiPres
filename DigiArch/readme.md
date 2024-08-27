@@ -37,12 +37,16 @@ Instructions adapted and synthesized from [Installing Node.js on Windows](https:
 ## Step 2: Edit index.pug and script.js files
 1. Copy and paste the code from **index.pug** into your own generated **index.pug** file. This builds the content of the form; edit as needed to adapt to your needs.
 
-2. Then, download and add **script.js** into your own **public -> javascripts** folder. This is the code that will turn your form's output into a JSON object and generate a metadata.txt file.
+![Screenshot of new index.pug content pasted in](https://github.com/user-attachments/assets/bbed45a6-8760-4bef-b80c-9dbcf69ff698)
+
+3. Then, download and add **script.js** into your own **public -> javascripts** folder. This is the code that will turn your form's output into a JSON object and generate a metadata.txt file.
+
+![Screenshot of script.js in pubic/javascripts folder](https://github.com/user-attachments/assets/4be73353-5131-405e-b3de-50d1b03c0122)
 
 ## Step 3: Using the local Node.js server
 These next instructions are from the lab's workflow. Some details may be different depending on how your files are named/what system you're using.
 
-1. Open up the ExpressProjects folder in VS Code.
+1. Open up the **Metadata_Form** folder in VS Code.
 2. In VS Code, open up the terminal by clicking **View -> Terminal** in the top nav bar.
 3. In the terminal, type the following commands in order:
 
@@ -52,10 +56,22 @@ npm install
 npx cross-env DEBUG=Metadata_Form:* npm start
 ```
 
-This creates a local server that can be accessed through Chrome which will allow us to see the form and download our metadata.txt file.
+This creates a local server that can be accessed through a browser which will allow us to see the form and download our metadata.txt file.
 
-4. In Chrome, navigate to localhost:3000 using the search bar. You should see the metadata form!
+![Screenshot of terminal output when the above commands are run](https://github.com/user-attachments/assets/23d640b3-8f0e-4646-9ed4-e40ebd4655b2)
+
+4. In a browser, navigate to **localhost:3000** using the search bar. You should see the metadata form!
+
+![Screenshot of metadata form in Chrome browser](https://github.com/user-attachments/assets/4c2b6de9-502a-460f-9706-7b3c8e4ab3d7)
+
+## Step 4: Using the metadata form
+1. Once the metadata form is open, fill in any relevant fields (if a field is N/A, just leave it blank).
+2. When all fields are filled out, click **Submit**. A metadata.txt file will generate and be added to your machine's Downloads folder.
+
+![Screenshot of downloaded metadata.txt file](https://github.com/user-attachments/assets/9597e1fb-a1b7-405b-8531-d4fbc5c186f5)
+
+3. Drag the text file into your own relevant metadata folder.
 
 ## Step 4: Closing the server
-When done using the metadata form, first click the **Unplug Icon** in VS code then type **Ctrl^C** into the terminal to close the server. You’ll be prompted by the Terminal, enter **‘Y’** then hit **Enter**.
+When done using the metadata form, type **Ctrl^C** into the VS Code terminal to close the server. You’ll be prompted by the terminal, enter **‘Y’** then hit **Enter**.
 
