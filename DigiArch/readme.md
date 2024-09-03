@@ -1,5 +1,7 @@
 # Re-Usable Metadata Form
-This form was created in 2024 for the lab to incorporate into our metadata workflow.
+This form was created in 2024 for the U-M Digital Preservation Lab to incorporate into our metadata workflow.
+
+The form is compatible with Google Chrome, Microsoft Edge, Mozilla Firefox, Safari, and Opera. For more specific version info, please reference [this link](https://www.w3schools.com/tags/att_a_download.asp).
 
 ## Step 1: Install Node.js (note: these instructions are written for a Windows machine)
 Instructions adapted and synthesized from [Installing Node.js on Windows](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows) and [Node.js tutorial in Visual Studio Code](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial).
