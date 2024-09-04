@@ -66,13 +66,17 @@ This creates a local server that can be accessed through a browser which will al
 
 ![Screenshot of metadata form in Chrome browser](https://github.com/user-attachments/assets/4c2b6de9-502a-460f-9706-7b3c8e4ab3d7)
 
+## Step 3.5: Re-routing file downloads in browser
+Default browser settings will typically send any downloads to your local machine's Downloads folder; however, since we want these metadata.txt files to land in a specific bag, I suggest changing your browser's settings to turn the **"Always ask where to save files"** option on.
+
+![Screenshot of browser settings that allow user to decide where a downloaded file will go](https://github.com/user-attachments/assets/a8293723-1e0f-409f-a5a3-232303eea768)
+
 ## Step 4: Using the metadata form
 1. Once the metadata form is open, fill in any relevant fields (if a field is N/A, just leave it blank).
-2. When all fields are filled out, click **Submit**. A metadata.txt file will generate and be added to your machine's Downloads folder.
+2. When all fields are filled out, click **Submit**.
+3. You'll be prompted by your browser to choose where the file should go. Enter the desired pathway then hit **Enter**.
 
-![Screenshot of downloaded metadata.txt file](https://github.com/user-attachments/assets/9597e1fb-a1b7-405b-8531-d4fbc5c186f5)
-
-3. Drag the text file into your own relevant metadata folder.
+Congrats, you now have a metadata text file that follows Archivematica (and XML) standards!
 
 ## Step 4: Closing the server
 When done using the metadata form, type **Ctrl^C** into the VS Code terminal to close the server. You’ll be prompted by the terminal, enter **‘Y’** then hit **Enter**.
