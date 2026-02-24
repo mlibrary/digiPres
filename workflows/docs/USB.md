@@ -80,4 +80,4 @@ _These instructions are adapted to use Falcon Crowdstrike Virus Scanning Softwar
 
     Essentially, we’re asking FTK to generate a csv of MD5 and SHA1 checksums for each of the carved files as early as possible. We will use this later to double check that the files haven’t changed.
 14. Double check that both the carved files and checksums.csv are there.
-15. Continue to [Packaging and Transfer Workflow](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
+15. Continue to [Packaging and Transfer Workflow](https://github.com/mlibrary/digiPres/edit/main/workflows/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
