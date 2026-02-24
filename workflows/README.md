@@ -4,9 +4,9 @@ The workflows on this page include steps to create forensic images or file trans
 
 ## Quick links
 
-  + [Floppy Disk Imaging](https://github.com/abbysyp/digipreslabdocs/blob/7a2a2c435bbd2b43bfaf35a1ceb22346348b9765/docs/FLOPPY.md)
-  + [USB or Hard Drive Transfers](https://github.com/abbysyp/digipreslabdocs/blob/7a2a2c435bbd2b43bfaf35a1ceb22346348b9765/docs/USB.md)
-  + [Cloud Transfers](https://github.com/abbysyp/digipreslabdocs/blob/7a2a2c435bbd2b43bfaf35a1ceb22346348b9765/docs/CLOUD.md)
+  + [Floppy Disk Imaging](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md)
+  + [USB or Hard Drive Transfers](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/USB.md)
+  + [Cloud Transfers](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/CLOUD.md)
 
 ## Software
 
