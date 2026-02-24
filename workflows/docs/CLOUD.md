@@ -44,7 +44,7 @@ _These instructions are adapted for the Windows machine (Yoda) in the Digital Pr
 
    <img src="../workflow-images/rclone_mount.png" alt="Example of the Wang folder mounted to the Z drive in File Explorer." width="500">
 
-3. Follow the steps to run a [Virus Scan](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/VIRUS-SCAN.md#virus-scan) on that directory.
+3. Follow the steps to run a [Virus Scan](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/VIRUS-SCAN.md#virus-scan) on that directory.
    
 5. Continue to **Rclone File Transfer**.
 
@@ -93,6 +93,6 @@ _These instructions are adapted for the Windows machine (Yoda) in the Digital Pr
     ```
    Once the command has run, check that the files have been downloaded into your **carved_files** folder.
 
-7. Continue to [Packaging and Transfer Workflow](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
+7. Continue to [Packaging and Transfer Workflow](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
 
    
