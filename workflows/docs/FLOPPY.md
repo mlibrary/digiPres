@@ -24,9 +24,9 @@ This workflow covers all methods, so first identify the type of floppy disk you�
 
 I am working with a...
 
-   + [3.5" IBM](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#floppy-reader)
-   + [3.5" Apple](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#kryoflux)
-   + [5.25"](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#fc5025)
+   + [3.5" IBM](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#floppy-reader)
+   + [3.5" Apple](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#kryoflux)
+   + [5.25"](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#fc5025)
 
 ### KryoFlux
 
@@ -105,8 +105,8 @@ I am working with a...
 
     <img src="../workflow-images/disk_image_browse_success.png" alt="Example of Done (successful) results shown in Disk Image and Browse." width="500">
     
-    If it continues to fail, try using [KryoFlux](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#kryoflux) with the 5.25” drive.
-13. Continue to [**Logical Transfer of Files**](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#-logical-transfer-of-files).
+    If it continues to fail, try using [KryoFlux](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#kryoflux) with the 5.25” drive.
+13. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#-logical-transfer-of-files).
 
 ### Floppy Reader
 
@@ -116,7 +116,7 @@ I am working with a...
 
    <img src="../workflow-images/usb_floppy_reader_setup.jpg" alt="USB floppy reader setup." width="500">
 
-5. Continue to [**Logical Transfer of Files**](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#-logical-transfer-of-files).
+5. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#-logical-transfer-of-files).
 
 ## 🔁 Logical Transfer of Files
 
@@ -153,7 +153,7 @@ I am working with a...
        
      + _Otherwise_, please talk to your supervisor so that a decision can be made about whether or not to retain the disk image.
 
-15. Continue to [Packaging and Transfer Workflow](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
+15. Continue to [Packaging and Transfer Workflow](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
    
 
 
