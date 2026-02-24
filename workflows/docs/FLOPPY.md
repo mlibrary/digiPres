@@ -82,7 +82,7 @@ I am working with a...
    
 16. Remove the media and disconnect the hardware first from the power strip, then the computer.
 17. Your disk image and log file can now be found in your **image** folder.
-18. Continue to [**Logical Transfer of Files**](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#-logical-transfer-of-files).
+18. Continue to [**Logical Transfer of Files**](https://github.com/abbysyp/digipreslabdocs/edit/main/docs/FLOPPY.md#logical-transfer-of-files).
 
 ### FC5025
 
@@ -106,7 +106,7 @@ I am working with a...
     <img src="../workflow-images/disk_image_browse_success.png" alt="Example of Done (successful) results shown in Disk Image and Browse." width="500">
     
     If it continues to fail, try using [KryoFlux](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#kryoflux) with the 5.25” drive.
-13. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#-logical-transfer-of-files).
+13. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#logical-transfer-of-files).
 
 ### Floppy Reader
 
@@ -116,7 +116,7 @@ I am working with a...
 
    <img src="../workflow-images/usb_floppy_reader_setup.jpg" alt="USB floppy reader setup." width="500">
 
-5. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#-logical-transfer-of-files).
+5. Continue to [**Logical Transfer of Files**](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md#logical-transfer-of-files).
 
 ## 🔁 Logical Transfer of Files
 
