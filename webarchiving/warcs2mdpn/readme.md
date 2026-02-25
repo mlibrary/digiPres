@@ -45,19 +45,18 @@ Collection > Seed > List of Crawls:
 
 From the Collection list, select Collection URL:
 
-https://partner.archive-it.org/1234/collections/22222
+- https://partner.archive-it.org/1234/collections/22222
 
 Click on Seeds
 
 From the Seed list, select Seed:
 
-https://partner.archive-it.org/1234/collections/22222/seeds/1234567
+- https://partner.archive-it.org/1234/collections/22222/seeds/1234567
 
 Get Crawl IDs from Crawling History and use those in WASAPI:
 
-https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1234567
-
-https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
+- https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1234567
+- https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
 
 ## Use "curl" to get a list of warc.gz files:
 Note: An Archive-It WARC is no bigger than 1GB, so a single crawl can generate multiple WARCs.
