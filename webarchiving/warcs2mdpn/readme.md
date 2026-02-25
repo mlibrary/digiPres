@@ -12,7 +12,7 @@ Basic Process:
  
 1. [Get crawl ID(s) for particular seed](#get-list-of-crawls)
 2. [Use "curl" to get list of warc.gz files](#use-curl-to-get-a-list-of-warcgz-files)
-3. Use "wget" to download the warc.gz files
+3. [Use "wget" to download the warc.gz files](#then-actually-download-the-warcgz-files)
 4. [Use "py-wacz" to Create single *.WACZ file from all warc.gz files](#use-pywacz-to-create-a-single-wacz-file-from-all-warcgz-files)
 5. Create metadata and use DART to move wacz file to MiPDN
 
@@ -99,7 +99,7 @@ The '>>' appends each list of warcs to the same url.list file.
 
 *** Note this issue when running wacz: https://github.com/webrecorder/py-wacz/issues/50
 
-Create a metadata.txt file containing fields, using information from Archive-it:
+## Create a metadata.txt file containing fields, using information from Archive-it:
 ```
 Collection: (same collection name from Archive-it)
 CollectionID: (same collection ID from Archive-it)
@@ -113,7 +113,7 @@ Country:
 Created:
 Updated:
 ```
-Use DART with MDPN configuration to transfer the wacz file and metadata.txt to MDPN for backup.
+## Use DART with MDPN configuration to transfer the wacz file and metadata.txt to MDPN for backup.
 Save bag as:
 
 UM_c[collectionID]_s[seedID]
