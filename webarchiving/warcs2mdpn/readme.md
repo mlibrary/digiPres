@@ -26,22 +26,11 @@ https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1234567
 
 https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## Use "curl" to get a list of warc.gz files:
 Note: An Archive-It WARC is no bigger than 1GB, so a single crawl can generate multiple WARCs.
 
 **** Using `sudo su` is key here****
+
 **** You also need https://jqlang.org/ installed to parse the locations ****
 ```
 sudo su 
@@ -52,6 +41,7 @@ curl -u username:password "https://warcs.archive-it.org/wasapi/v1/webdata?crawl=
 `wget --http-user=username --http-password=password --accept txt,gz -i url.list`
 
 **** If you have multiple crawls, you may want to use a batch process using a Bash script that pulls the crawls from the Seed Crawls list. 
+
 1. Click on Crawling History
 2. To download CSV of Seed Crawls click on Download Seed Crawls list
 3. Open the CSV in spreadsheet
