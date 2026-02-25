@@ -5,7 +5,20 @@ Backup from Archive-It, partially based on this article:
 How to find and download your WARC files with WASAPI – Archive-It Help Center
 https://support.archive-it.org/hc/en-us/articles/360015225051-How-to-find-and-download-your-WARC-files-with-WASAPI
 
- <img src="./IAtoMDPNflowchart.png" alt="Flowchart for process of backing up warc.gz files from Archive-it to MiDPN" width="200" align="center" />
+ <img src="./IAtoMDPNflowchart.png" alt="Flowchart for process of backing up warc.gz files from Archive-it to MiDPN" width="200" align="left" />
+
+ Basic Process:
+- Get crawl ID(s) for particular seed
+- Get WARC.gz file and page count
+- Use "curl" to get list of warc.gz files
+- Use "wget" to download the warc.gz files
+- Use "py-wacz" to Create single *.WACZ file from all warc.gz files
+- Create metadata and use DART to move wacz file to MiPDN
+
+- [OPTIONAL] Run site locally?
+- [Other Considerations] Extract just the files
+
+
 
 Get list of Crawls:
 
