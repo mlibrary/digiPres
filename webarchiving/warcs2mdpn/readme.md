@@ -10,15 +10,14 @@ https://support.archive-it.org/hc/en-us/articles/360015225051-How-to-find-and-do
 
 Basic Process:
  
-1. Get crawl ID(s) for particular seed
-2. Get WARC.gz file and page count
-3. Use "curl" to get list of warc.gz files
-4. Use "wget" to download the warc.gz files
-5. Use "py-wacz" to Create single *.WACZ file from all warc.gz files
-6. Create metadata and use DART to move wacz file to MiPDN
+1. [Get crawl ID(s) for particular seed] (#get-list-of-crawls)
+2. [Use "curl" to get list of warc.gz files] (#use-curl-to-get-a-list-of-warcgz-files)
+3. Use "wget" to download the warc.gz files
+4. [Use "py-wacz" to Create single *.WACZ file from all warc.gz files] (#use-pywacz-to-create-a-single-wacz-file-from-all-warcgz-files]
+5. Create metadata and use DART to move wacz file to MiPDN
 
-- [OPTIONAL] Run site locally?
-- [Other Considerations] Extract just the files
+- OPTIONAL  [Run site locally?] (#run-site-locally)
+- Other Considerations [Extract just the files] (#other-considerations-extract-just-the-files)
 
 
 <br/>
