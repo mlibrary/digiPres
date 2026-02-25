@@ -14,7 +14,7 @@ Basic Process:
 2. [Use "curl" to get list of warc.gz files](#use-curl-to-get-a-list-of-warcgz-files)
 3. [Use "wget" to download the warc.gz files](#then-actually-download-the-warcgz-files)
 4. [Use "py-wacz" to Create single *.WACZ file from all warc.gz files](#use-pywacz-to-create-a-single-wacz-file-from-all-warcgz-files)
-5. Create metadata and use DART to move wacz file to MiPDN
+5. [Create metadata and use DART to move wacz file to MiPDN](#create-a-metadatatxt-file-containing-fields-using-information-from-archive-it)
 
 - OPTIONAL  [Run site locally?](#run-site-locally)
 - Other Considerations [Extract just the files](#other-considerations-extract-just-the-files)
