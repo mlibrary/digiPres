@@ -12,17 +12,17 @@ Collection > Seed > List of Crawls:
 
 From the Collection list, select Collection URL:
 
-https://partner.archive-it.org/1011/collections/13472
+https://partner.archive-it.org/1234/collections/22222
 
 Click on Seeds
 
 From the Seed list, select Seed:
 
-https://partner.archive-it.org/1011/collections/13472/seeds/3316427
+https://partner.archive-it.org/1234/collections/22222/seeds/1234567
 
-Get Crawl IDs from Crawling History:
+Get Crawl IDs from Crawling History and use those in WASAPI:
 
-https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1993810
+https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1234567
 
-https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1991571
+https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
 
