@@ -41,23 +41,23 @@ https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
 ## Use "curl" to get a list of warc.gz files:
 Note: An Archive-It WARC is no bigger than 1GB, so a single crawl can generate multiple WARCs.
 
-**** Using sudo su is key here****
+**** Using `sudo su` is key here****
 **** You also need https://jqlang.org/ installed to parse the locations ****
 ```
 sudo su 
 curl -u username:password "https://warcs.archive-it.org/wasapi/v1/webdata?crawl=1234567" | jq -r .files[].locations[0] > url.list
 ```
 
-##Then, actually download the warc.gz files:
+## Then, actually download the warc.gz files:
 `wget --http-user=username --http-password=password --accept txt,gz -i url.list`
 
 **** If you have multiple crawls, you may want to use a batch process using a Bash script that pulls the crawls from the Seed Crawls list. 
-Click on Crawling History
-To download CSV of Seed Crawls click on Download Seed Crawls list
-Open the CSV in spreadsheet
-Select the entries from the Crawl ID column and save these as plain text in a file (RWAcrawls.txt).
+1. Click on Crawling History
+2. To download CSV of Seed Crawls click on Download Seed Crawls list
+3. Open the CSV in spreadsheet
+4. Select the entries from the Crawl ID column and save these as plain text in a file (RWAcrawls.txt).
 
-This script needs to run after sudo su.
+This script needs to run after `sudo su`.
 ```
  #!/bin/bash
   while IFS= read -r crawl; do
@@ -69,7 +69,7 @@ The '>>' appends each list of warcs to the same url.list file.
 
 *** Need to check for crawls with count > 100, will need to use pagination option.***
 
-##Use pywacz to create a single *.WACZ file from all warc.gz files (using https://github.com/webrecorder/py-wacz):
+## Use pywacz to create a single *.WACZ file from all warc.gz files (using https://github.com/webrecorder/py-wacz):
 
 `wacz create -o example.wacz -f *.warc.gz -t --detect-pages`
 
