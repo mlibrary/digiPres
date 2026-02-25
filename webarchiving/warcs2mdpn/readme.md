@@ -8,7 +8,7 @@ https://support.archive-it.org/hc/en-us/articles/360015225051-How-to-find-and-do
  <img src="./IAtoMDPNflowchart.png" alt="Flowchart for process of backing up warc.gz files from Archive-it to MiDPN" width="200" align="left" />
  
 
- Basic Process:
+## Basic Process:
  
 1. Get crawl ID(s) for particular seed
 2. Get WARC.gz file and page count
