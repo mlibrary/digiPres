@@ -93,7 +93,8 @@ The '>>' appends each list of warcs to the same url.list file.
 
 *** Need to check for crawls with count > 100, will need to use pagination option.***
 
-## Use pywacz to create a single *.WACZ file from all warc.gz files (using https://github.com/webrecorder/py-wacz):
+## Use pywacz to create a single *.WACZ file from all warc.gz files 
+(using https://github.com/webrecorder/py-wacz):
 
 `wacz create -o example.wacz -f *.warc.gz -t --detect-pages`
 
