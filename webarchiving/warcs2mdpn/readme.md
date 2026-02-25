@@ -114,7 +114,7 @@ Start Apache webserver:
 
 `sudo apachectl restart`
 
-http://localhost/webarchive/AfricanElections/
+http://localhost/webarchive/exampleSite/
 
 **** Using Apache webserver here because of ReplayWeb's HTTPS CORS requirement, mentioned here https://replayweb.page/docs/user-guide/locations/, simple HTTPS will not work.
 
