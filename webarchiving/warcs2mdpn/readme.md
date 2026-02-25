@@ -38,7 +38,7 @@ https://warcs.archive-it.org/wasapi/v1/webdata?crawl=2468901
 
 
 
-##Use "curl" to get a list of warc.gz files:
+## Use "curl" to get a list of warc.gz files:
 Note: An Archive-It WARC is no bigger than 1GB, so a single crawl can generate multiple WARCs.
 
 **** Using sudo su is key here****
@@ -71,7 +71,7 @@ The '>>' appends each list of warcs to the same url.list file.
 
 ##Use pywacz to create a single *.WACZ file from all warc.gz files (using https://github.com/webrecorder/py-wacz):
 
-`wacz create -o africanElections.wacz -f *.warc.gz -t --detect-pages`
+`wacz create -o example.wacz -f *.warc.gz -t --detect-pages`
 
 *** Note this issue when running wacz: https://github.com/webrecorder/py-wacz/issues/50
 
@@ -94,7 +94,7 @@ Save bag as:
 
 UM_c[collectionID]_s[seedID]
 
-Elections in Africa example: UM_c13472_s3316427
+For example: UM_c22222_s1234567
 
 ## Run Site Locally
 
@@ -113,7 +113,7 @@ HTML:
   </head>
   <body>
     <section class="web-archive">
-    <replay-web-page replayBase="js/" url="https://forgood.org.za/" source="wacz/africanElections.wacz"></replay-web-page>
+    <replay-web-page replayBase="js/" url="https://examplesite.org/" source="wacz/example.wacz"></replay-web-page>
     </section>
 
   </body>
