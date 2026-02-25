@@ -96,6 +96,49 @@ UM_c[collectionID]_s[seedID]
 
 Elections in Africa example: UM_c13472_s3316427
 
+## Run Site Locally
+
+Move newly created africanElections.wacz to webserver location and update index.html file accordingly (see https://replayweb.page/docs/embedding/#self-hosting):
+
+HTML:
+```
+<!doctype html>
+<html class="no-overflow">
+  <head>
+    <title>WebArchive</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/ui.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <section class="web-archive">
+    <replay-web-page replayBase="js/" url="https://forgood.org.za/" source="wacz/africanElections.wacz"></replay-web-page>
+    </section>
+
+  </body>
+</html>
+```
+Start Apache webserver:
+
+`sudo apachectl restart`
+
+http://localhost/webarchive/AfricanElections/
+
+**** Using Apache webserver here because of ReplayWeb's HTTPS CORS requirement, mentioned here https://replayweb.page/docs/user-guide/locations/, simple HTTPS will not work.
+
+## [Other Considerations] Extract just the files
+
+If you do not need to capture the entire site but just the content, you can extract PDFs and/or other files such as images from WARC.gz files for easier access using warc-extractor from https://github.com/recrm/ArchiveTools.  
+
+Usage examples:
+```
+python3 warc-extractor.py http:content-type:pdf
+python3 warc_extractor.py -dump content http:error:200
+```
+
+
+
 
 
 
