@@ -75,17 +75,17 @@ wacz create -o africanElections.wacz -f *.warc.gz -t --detect-pages
 
 Create a metadata.txt file containing fields, using information from Archive-it:
 
-Collection: (same collection name from Archive-it)
-CollectionID: (same collection ID from Archive-it)
-Seed: (seed ID from Archive-it)
-URL: (original site URL)
-Title: (Title of the website)
-Creator: (creator of the website)
-Description: (same description from Archive-it)
-Language:
-Country:
-Created:
-Updated:
+- Collection: (same collection name from Archive-it)
+- CollectionID: (same collection ID from Archive-it)
+- Seed: (seed ID from Archive-it)
+- URL: (original site URL)
+- Title: (Title of the website)
+- Creator: (creator of the website)
+- Description: (same description from Archive-it)
+- Language:
+- Country:
+- Created:
+- Updated:
 
 Use DART with MDPN configuration to transfer the wacz file and metadata.txt to MDPN for backup.
 Save bag as:
