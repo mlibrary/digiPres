@@ -104,29 +104,25 @@ _These instructions are adapted for the Windows machine (Yoda) in the Digital Pr
 
    <img src="../workflow-images/vs_code_play_button.png" alt="VS Code Play Icon." width="75">
    
-4. Follow the input prompts in the terminal by clicking and dragging each file path then pressing **Enter**. After being prompted for the top-level barcode directory, _make sure File Explorer is closed before pressing **Enter**!!!_ Otherwise, you’ll get a File Permission error.
+4. Follow the input prompts in the terminal. You may run into a File Permissions error - if this happens, make sure you are not in the barcode directory in File Explorer before pressing **Enter**.
 
    Here's a more specific example of the terminal prompts and output:
     ```
-    Enter path to the metadata text file you just generated: c:\Users\lstuch1\Desktop\39015092248429\transfer_metadata\metadata.txt
+    Would you like to bag ('b') or verify checksums ('c')?: b
     
-    Enter path to the top-level barcode directory: c:\Users\lstuch1\Desktop\39015092248429
+    Enter path to barcode directory: c:\Users\lstuch1\Desktop\39015092248429
     
     yay! bag is valid
-    
-    Enter path to the checksums.csv file that FTK generated: c:\Users\lstuch1\Desktop\39015092248429\data\transfer_metadata\checksums.csv
-    
-    Enter path to the manifest-md5.txt file that bagit generated: c:\Users\lstuch1\Desktop\39015092248429\manifest-md5.txt
-    
-    Enter path where you want failed_checksums.txt file to go: c:\Users\lstuch1\Desktop\39015092248429\data\transfer_metadata
-    
-    finished! validated 27 files
+
+    Validating checksums...
+
+    finished! validated 27 out of 27 files
     ```
 
 6. If a **failed_checksums.txt** file was generated, investigate the results and restart from the corresponding workflow:
-   * [Floppy Disk](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/FLOPPY.md#floppy-disk)
-   * [USB or Hard Drive](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/USB.md#usb-or-external-hard-drive)
-   * [Cloud](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/CLOUD.md#cloud-google-drive-or-dropbox)
+  + [Floppy Disk Imaging](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/FLOPPY.md)
+  + [USB or Hard Drive Transfers](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/USB.md)
+  + [Cloud Transfers](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/CLOUD.md)
      
 7. Otherwise, continue to **Transfer to Archivematica**.
 
