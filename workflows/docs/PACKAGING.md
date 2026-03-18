@@ -1,6 +1,6 @@
 # Packaging and Transferring Files to Archivematica
 
-_Last updated on November 12, 2025_
+_Last updated on March 18, 2026_
 
 ## 🌳 Generate File Tree
 
