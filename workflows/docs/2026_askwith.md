@@ -1,10 +1,24 @@
-# Virus Scan
+# 2026 Summer Askwith Project
 
 _Last updated on June 16, 2025_
 
-## 🔍 Identify Files
+## 📁 Prepare Media Directory
+   
+1. For each transfer, create an empty folder and name it the corresponding barcode.
 
-_These instructions are adapted for the Windows machine (Yoda) in the Digital Preservation Lab._
+6. Within the top-level barcode folder, create two additional folders called **carved_files** and **transfer_metadata**.
+
+   <img src="../workflow-images/prepared_directory.jpeg" alt="Example of carved_files and transfer_metadata folders created in File Explorer." width="500">
+  
+8. Continue to **Rclone Mount and Virus Scan**.
+
+# Rclone Mount and Virus Scan
+
+## 📁 Rclone Mount
+
+1. Open the 'rclone mount' shortcut on the Desktop of Yoda.
+
+## 🔍 Identify Files
 
 1. Let's identify where we want to point the virus scanning software:
    * If you are working with a **physical** or **cloud drive** OR a **3.5" floppy disk in a USB reader**, the files we want to scan should be located in **File Explorer**.
