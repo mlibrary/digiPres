@@ -43,3 +43,4 @@ _Last updated on June 16, 2025_
 1. Click and drag one video file from the R: drive in File Explorer to the **carved_files** folder you created.
 2. When prompted, click **Teracopy**.
 3. Once the transfer is finished, double check that the file is there.
+4. 7. Continue to [Packaging and Transfer Workflow](https://github.com/mlibrary/digiPres/blob/main/workflows/docs/PACKAGING.md#packaging-and-transferring-files-to-archivematica).
