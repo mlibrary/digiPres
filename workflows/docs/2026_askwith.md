@@ -17,6 +17,9 @@ _Last updated on June 16, 2025_
 ## 📁 Rclone Mount
 
 1. Open the 'rclone mount' shortcut on the Desktop of Yoda.
+2.    Once the command has run, you should be able to access the folder through Windows File Explorer.
+
+   <img src="../workflow-images/rclone_mount.png" alt="Example of the Wang folder mounted to the Z drive in File Explorer." width="500">
 
 ## 🔍 Identify Files
 
