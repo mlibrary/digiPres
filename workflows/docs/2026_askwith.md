@@ -36,7 +36,18 @@ _Last updated on June 16, 2025_
 
    <img src="../workflow-images/scan_results.png" alt="Virus scan results. A positive result will display the message No current threats." width="500">
    
-10. If all looks clear, continue to File Transfer.
+10. If all looks clear, continue to Generate Checksum File.
+
+# Generate Checksum File
+
+3. On the Desktop of Yoda, click on **rclone checksums**.
+4. Once you are in **rclone**, enter:
+
+    ```
+    rclone md5sum [path to dropbox drive] > [transfer metadata folder path]\checksums.txt
+    ```
+
+10. Check that the **checksums.txt** file was created in the transfer_metadata folder, then continue to File Transfer.
 
 # File Transfer
 
