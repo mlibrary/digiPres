@@ -36,7 +36,7 @@ _Last updated on June 16, 2025_
 
    <img src="../workflow-images/scan_results.png" alt="Virus scan results. A positive result will display the message No current threats." width="500">
    
-10. If all looks clear, continue File Transfer.
+10. If all looks clear, continue to File Transfer.
 
 # File Transfer
 
