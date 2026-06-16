@@ -19,22 +19,9 @@ _Last updated on June 16, 2025_
 1. Open the 'rclone mount' shortcut on the Desktop of Yoda.
 2.    Once the command has run, you should be able to access the folder through Windows File Explorer.
 
-   <img src="../workflow-images/rclone_mount.png" alt="Example of the Wang folder mounted to the Z drive in File Explorer." width="500">
-
-## 🔍 Identify Files
-
-1. Let's identify where we want to point the virus scanning software:
-   * If you are working with a **physical** or **cloud drive** OR a **3.5" floppy disk in a USB reader**, the files we want to scan should be located in **File Explorer**.
-  
       <img src="../workflow-images/rclone_mount.png" alt="Example of the Wang folder mounted to the Z drive in File Explorer." width="500">
 
-   💡 **Why Scan Now?**
-
-   > When plugging physical media carriers like a thumb drive directly into the lab computer (even via write blocker), we are putting that computer at risk. We want to be able to identify any viruses as quickly and contained as possible. In other words, while the computer is **disconnected** from the network and **before** copies of the files have been made.
-
 ## 🦠 Running Falcon Crowdstrike
-
-_These instructions are adapted for the Windows machine (Yoda) in the Digital Preservation Lab._
 
 1. Open **Windows Security** from the Desktop Search Bar.
    
@@ -48,7 +35,11 @@ _These instructions are adapted for the Windows machine (Yoda) in the Digital Pr
 8. Run the scan, then scroll back to **Scan options** at the top - you should see the results of the virus scan.
 
    <img src="../workflow-images/scan_results.png" alt="Virus scan results. A positive result will display the message No current threats." width="500">
-10. If all looks clear, continue to the next step in the corresponding workflow:
-      * Floppy Disk
-      * [USB or Hard Drive](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/CLOUD.md#-rclone-file-transfer)
-      * [Cloud](https://github.com/abbysyp/digipreslabdocs/blob/main/docs/CLOUD.md#-rclone-file-transfer)
+   
+10. If all looks clear, continue File Transfer.
+
+# File Transfer
+
+1. Click and drag one video file from the R: drive in File Explorer to the **carved_files** folder you created.
+2. When prompted, click **Teracopy**.
+3. Once the transfer is finished, double check that the file is there.
