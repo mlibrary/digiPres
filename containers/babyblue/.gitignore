@@ -1,0 +1,8 @@
+# Environment variables and sensitive keys
+.env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+
