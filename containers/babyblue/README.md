@@ -13,4 +13,6 @@ To run this, pull the linked Docker image https://github.com/mutanthumb/babyblue
 
 docker compose -f compostest.yml up
 
+You will need to create a .env file for your environment variables for settings.py and composetest.yml
+
 
