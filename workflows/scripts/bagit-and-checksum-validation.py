@@ -3,6 +3,7 @@ import json
 import csv
 from pathlib import Path
 import re
+from unidecode import unidecode
 
 globus_uuid = '5d8b0f1f-e5b1-4e8c-9310-22894a7d5f00'
 
@@ -16,6 +17,7 @@ def create_bag(metadata_file, barcode_dir):
     # pull from already created metadata text file
     metadata_prof['BarcodeNumberIdentifier'] = full_metadata_prof['BarcodeNumberIdentifier']
     metadata_prof['RecordsLabel'] = full_metadata_prof['RecordsLabel']
+    # or AlternateID
     metadata_prof['AlternateTitle'] = full_metadata_prof['AlternateTitle']
     metadata_prof['OriginatingUnitDepartment'] = full_metadata_prof['OriginatingUnitDepartment']
     metadata_prof['AccessionNumberCollection'] = full_metadata_prof['AccessionNumberCollection']
@@ -42,7 +44,7 @@ def get_ftk_checksums(ftk_checksums):
             # MIGHT NEED TO REPLACE split delimiter
             file_path = (lines[2].split('[root]\\')[-1]).replace('\\', '/')
             file_path_replaced_spaces = file_path.replace(" ", "_")
-            ftk_dict[file_path_replaced_spaces] = lines[0]
+            ftk_dict[unidecode(file_path_replaced_spaces)] = lines[0]
 
     return ftk_dict
 
@@ -53,8 +55,10 @@ def get_rclone_checksums(original_checksums):
         
         for line in rclone:
             file_path = (line.strip().split('  ')[-1])
+            # replace punctuation with underscore to account for bagit file renaming
+            file_path = file_path.replace(',', '_')
             checksum = line.strip().split('  ')[0]
-            rclone_dict[file_path] = checksum
+            rclone_dict[unidecode(file_path)] = checksum
 
     return rclone_dict
 
@@ -69,7 +73,7 @@ def get_teracopy_checksums(original_checksums):
             file_path = (file_path.replace('/', '/'))                       
             checksum = line.strip().split(' *')[0]
     
-            teracopy_dict[file_path] = checksum.lower()
+            teracopy_dict[unidecode(file_path)] = checksum.lower()
 
     return teracopy_dict
 
@@ -82,6 +86,7 @@ def compare_with_bagit(bagit_checksums, failed_checksums, original_dict):
         for line in bgt:
                 # to account for chinese character double-width quotation mark
                 fixed_line = line.replace("＂", "\"")
+                fixed_line = unidecode(fixed_line)
                 # only check against carved files
                 if "carved_files" in fixed_line:
                     num_validated += 1
@@ -189,7 +194,17 @@ def batch_bag(path_to_batch_directory):
             print("Validating checksums...")
     
             call_checksum_validator(f'{f}')
-        
+
+def batch_checksums(path_to_batch_directory):
+    p = Path(path_to_batch_directory)
+    for f in p.iterdir():
+        # skip irrelevant mac file
+        if '.DS_Store' in str(f):
+            next
+        elif 'globus-ingest.json' in str(f):
+            next
+        else:
+            call_checksum_validator(f'{f}')
 
 bag_or_checksum = input("Would you like to bag ('b') or verify checksums ('c') or create globus ingest file ('g')?: ")
 if bag_or_checksum == 'b':
@@ -211,7 +226,7 @@ elif bag_or_checksum == 'c':
     
     # validation check
     path_to_bag = input("Enter path to bag: ")
-    call_checksum_validator(path_to_bag.strip("'"))
+    batch_checksums(path_to_bag.strip("'"))
 
 elif bag_or_checksum == 'g':
     
