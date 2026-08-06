@@ -2,7 +2,7 @@ import bagit
 import json
 import csv
 from pathlib import Path
-import re
+import os
 from unidecode import unidecode
 
 globus_uuid = '5d8b0f1f-e5b1-4e8c-9310-22894a7d5f00'
@@ -17,7 +17,6 @@ def create_bag(metadata_file, barcode_dir):
     # pull from already created metadata text file
     metadata_prof['BarcodeNumberIdentifier'] = full_metadata_prof['BarcodeNumberIdentifier']
     metadata_prof['RecordsLabel'] = full_metadata_prof['RecordsLabel']
-    # or AlternateID
     metadata_prof['AlternateTitle'] = full_metadata_prof['AlternateTitle']
     metadata_prof['OriginatingUnitDepartment'] = full_metadata_prof['OriginatingUnitDepartment']
     metadata_prof['AccessionNumberCollection'] = full_metadata_prof['AccessionNumberCollection']
@@ -107,51 +106,59 @@ def compare_with_bagit(bagit_checksums, failed_checksums, original_dict):
         print("finished! validated", num_passed, "out of", num_validated, "files")
         
 def call_checksum_validator(path_to_bag):
+
+    if os.path.isfile(f'{path_to_bag}/transfer_metadata/metadata.txt'):
     
-    search_directory = Path(f'{path_to_bag}/data/transfer_metadata')
-    found_files = list(search_directory.glob(f'{"checksums"}.*'))
-    original_checksums = str(found_files[0])
-    
-    if "txt" in original_checksums:
-        original_dict = get_rclone_checksums(original_checksums)
-    elif "csv" in original_checksums:
-        original_dict = get_ftk_checksums(original_checksums)
-    elif "md5" in original_checksums:
-        original_dict = get_teracopy_checksums(original_checksums)
+        search_directory = Path(f'{path_to_bag}/data/transfer_metadata')
+        found_files = list(search_directory.glob(f'{"checksums"}.*'))
+        original_checksums = str(found_files[0])
         
-    bagit_checksums = f'{path_to_bag}/manifest-md5.txt'
-    failed_checksums = f'{path_to_bag}/data/transfer_metadata'
-    
-    compare_with_bagit(bagit_checksums, failed_checksums, original_dict)
+        if "txt" in original_checksums:
+            original_dict = get_rclone_checksums(original_checksums)
+        elif "csv" in original_checksums:
+            original_dict = get_ftk_checksums(original_checksums)
+        elif "md5" in original_checksums:
+            original_dict = get_teracopy_checksums(original_checksums)
+            
+        bagit_checksums = f'{path_to_bag}/manifest-md5.txt'
+        failed_checksums = f'{path_to_bag}/data/transfer_metadata'
+        
+        compare_with_bagit(bagit_checksums, failed_checksums, original_dict)
+
+    else:
+        print(f'{path_to_bag} does not contain a valid metadata file')
 
 def convert_to_globus(path_to_bag):
 
     globus_storage_url = f'https://app.globus.org/file-manager?origin_id={globus_uuid}&origin_path=%2Fgodata%2FDigiPresBags'
 
-    # REPLACE DOT
-    bag_info = Path(f'{path_to_bag}/bag-info.txt')
-    item = {}
-    content = {}
-    with open(bag_info, 'r', encoding='utf-8') as f:
-        lines = [line.rstrip() for line in f]
-        for line in lines:
-            # split by first instance of : delimiter
-            parts = line.split(":", 1)
+    if os.path.isfile(f'{path_to_bag}/bag-info.txt'):
+        bag_info = Path(f'{path_to_bag}/bag-info.txt')
+        item = {}
+        content = {}
+        with open(bag_info, 'r', encoding='utf-8') as f:
+            lines = [line.rstrip() for line in f]
+            for line in lines:
+                # split by first instance of : delimiter
+                parts = line.split(":", 1)
 
-            # add to json dict
-            content[parts[0].strip()] = parts[-1].strip()
+                # add to json dict
+                content[parts[0].strip()] = parts[-1].strip()
 
-            if 'Barcode' in parts[0].strip():
-                barcode = parts[-1].strip()
-                item['subject'] = barcode
-                content['url'] = globus_storage_url + f'%2F{barcode}%2F'
-                   
-        item['visible_to'] = ['all_authenticated_users']
-        item['content'] = content
+                if 'Barcode' in parts[0].strip():
+                    barcode = parts[-1].strip()
+                    item['subject'] = barcode
+                    content['url'] = globus_storage_url + f'%2F{barcode}%2F'
+                    
+            item['visible_to'] = ['all_authenticated_users']
+            item['content'] = content
 
-        f.close()
+            f.close()
 
-    return item
+        return item
+
+    else:
+        print(f'{path_to_bag} does not contain a valid bag info file')
 
 def batch_globus(path_to_batch_directory):
 
@@ -168,7 +175,7 @@ def batch_globus(path_to_batch_directory):
         elif 'globus-ingest.json' in str(f):
             next
         else:
-            print(f)
+            print(f'adding {f} to search ingest file')
             gmeta.append(convert_to_globus(str(f)))
 
     ingest_data['gmeta'] = gmeta
@@ -184,9 +191,7 @@ def batch_bag(path_to_batch_directory):
     p = Path(path_to_batch_directory)
     for f in p.iterdir():
         # skip irrelevant mac file
-        if '.DS_Store' in str(f):
-            next
-        else:
+        if os.path.isfile(f'{f}/transfer_metadata/metadata.txt'):
             metadata_file = f'{f}/transfer_metadata/metadata.txt'
             print(metadata_file)
             create_bag(metadata_file, f)
@@ -194,6 +199,9 @@ def batch_bag(path_to_batch_directory):
             print("Validating checksums...")
     
             call_checksum_validator(f'{f}')
+        else:
+            print(f'{f} does not contain a valid metadata file')
+
 
 def batch_checksums(path_to_batch_directory):
     p = Path(path_to_batch_directory)
