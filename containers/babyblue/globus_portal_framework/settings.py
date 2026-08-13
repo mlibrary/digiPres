@@ -105,12 +105,15 @@ DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a , between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","127.0.0.1").split(",")
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","127.0.0.1").split(",")
 
 #ALLOWED_HOSTS = ['localhost']
 #INTERNAL_IPS = (
 #    '127.0.0.1',
 #)
+
+# Ensure allowed hosts accepts OpenShift routing paths
+ALLOWED_HOSTS = [os.environ.get('APP_ROUTE_HOST', '*')]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -218,14 +221,15 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.{}'.format(
-             os.getenv('DATABASE_ENGINE', 'sqlite3')
-         ),
-         'NAME': os.getenv('DATABASE_NAME', 'dockerdjangobabyblue'),
-         'USER': os.getenv('DATABASE_USERNAME', 'dbuser'),
-         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'password'),
-         'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-         'PORT': os.getenv('DATABASE_PORT', 5432),
+         # 'ENGINE': 'django.db.backends.{}'.format(
+         #    os.environ.get('DATABASE_ENGINE', 'sqlite3')
+         #),
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
+         'USER': os.environ.get('DATABASE_USERNAME', 'postgres'),
+         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'secret'),
+         'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
+         'PORT': os.environ.get('DATABASE_PORT', 5432),
      }
  }
  
