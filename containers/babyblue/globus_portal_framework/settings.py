@@ -225,9 +225,13 @@ DATABASES = {
          #    os.environ.get('DATABASE_ENGINE', 'sqlite3')
          #),
          'ENGINE': 'django.db.backends.postgresql',
-         'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
-         'USER': os.environ.get('DATABASE_USERNAME', 'postgres'),
-         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'secret'),
+         #'NAME': os.environ.get('DATABASE_NAME', 'postgres'),
+         #'USER': os.environ.get('DATABASE_USERNAME', 'postgres'),
+         #'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'secret'),
+         'NAME': os.environ.get('POSTGRESQL_DATABASE', 'postgres'),
+         'USER': os.environ.get('POSTGRESQL_USER', 'postgres'),
+         'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', 'secret'),
+
          'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
          'PORT': os.environ.get('DATABASE_PORT', 5432),
      }
