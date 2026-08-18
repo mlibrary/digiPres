@@ -29,11 +29,11 @@ def create_bag(metadata_file, barcode_dir, good_bags_dir, bad_bags_dir):
   bag = bagit.make_bag(bag_dir=barcode_dir, bag_info=metadata_prof, checksums=["md5"])
 
   if bag.is_valid():
-      print("yay! bag is valid")
       shutil.move(barcode_dir, good_bags_dir)
+      return True
   else:
-      print("boo! bag is not valid")
       shutil.move(barcode_dir, bad_bags_dir)
+      return False
 
 # create dictionary of original ftk checksums
 def get_ftk_checksums(ftk_checksums):
@@ -249,6 +249,9 @@ def batch_globus(path_to_batch_directory):
 
 def batch_bag(path_to_batch_directory):
 
+    num_tried = 0
+    num_successful = 0
+
     # create bags directory to plop newly created bags in
     good_bags = "good_bags"
     bad_bags = "bad_bags"
@@ -267,20 +270,30 @@ def batch_bag(path_to_batch_directory):
     except Exception as e:
         print(f"an error occurred: {e}")
 
-
     p = Path(path_to_batch_directory)
+    # count only the folders directly inside the path
+    dir_count = sum(1 for item in p.iterdir() if item.is_dir())
+    # subtract good_bags and bad_bags
+    dir_count = dir_count - 2
+
+
     # loop through batch of bags
     for f in p.iterdir():
         # check if there is a metadata file
         if os.path.isfile(f'{f}/transfer_metadata/metadata.txt'):
-            print(f'bagging {f}')
+            num_tried += 1
+            print(f'bagging {num_tried} out of {dir_count} directories')
             metadata_file = f'{f}/transfer_metadata/metadata.txt'
             # create bag
-            create_bag(metadata_file, f, good_bags, bad_bags)
+            is_success = create_bag(metadata_file, f, good_bags, bad_bags)
+            if is_success:
+                num_successful += 1
         elif 'good_bags' in str(f) or 'bad_bags' in str(f) or '.DS_Store' in str(f):
             next
         else:
             print(f'{f} does not contain a valid metadata file')
+
+    print(f'{num_successful} bags successfully created out of {dir_count}')
 
     # validate checksums
     print("Validating checksums...")
