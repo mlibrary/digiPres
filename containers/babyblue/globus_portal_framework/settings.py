@@ -100,8 +100,21 @@ DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # Set if using POSTGRES
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#database  # noqa
-#SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
+# This is a general Django setting if views need to redirect to login
+# https://docs.djangoproject.com/en/3.2/ref/settings/#login-url
+LOGIN_URL = '/login/globus'
+
+"""
+SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = [
+    {
+        'name': 'DigiPres',
+        'uuid': 'blahblah',
+    }
+]
+"""
+SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = os.environ.get("SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS")
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a , between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
@@ -210,14 +223,14 @@ TEMPLATES = [
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-'''
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-'''
+"""
 
 DATABASES = {
     'default': {
@@ -231,7 +244,6 @@ DATABASES = {
          'NAME': os.environ.get('POSTGRESQL_DATABASE', 'postgres'),
          'USER': os.environ.get('POSTGRESQL_USER', 'postgres'),
          'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', 'secret'),
-
          'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
          'PORT': os.environ.get('DATABASE_PORT', 5432),
      }

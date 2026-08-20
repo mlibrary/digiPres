@@ -1,0 +1,9 @@
+Build process for openshift
+
+docker buildx build \
+    --pull \
+    --no-cache \
+    --push \
+    --tag ghcr.io/mutanthumb/baby-blue:multi.4 \
+    --platform linux/arm64,linux/amd64 \
+    .

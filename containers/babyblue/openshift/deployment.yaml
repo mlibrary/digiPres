@@ -1,109 +1,3 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: baby-blue-postgresql-data
-  labels:
-    app: baby-blue-postgresql
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: baby-blue-postgresql
-  labels:
-    app: baby-blue-postgresql
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: baby-blue-postgresql
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: baby-blue-postgresql
-    spec:
-      containers:
-        - name: postgresql
-          image: quay.io/sclorg/postgresql-16-c9s:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - name: postgresql
-              containerPort: 5432
-              protocol: TCP
-          envFrom:
-            - secretRef:
-                name: envsecret
-          volumeMounts:
-            - name: postgresql-data
-              mountPath: /var/lib/pgsql/data
-          env:
-            - name: PGDATA
-              value: /var/lib/pgsql/data/userdata
-          readinessProbe:
-            tcpSocket:
-              port: postgresql
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 3
-            failureThreshold: 6
-          livenessProbe:
-            tcpSocket:
-              port: postgresql
-            initialDelaySeconds: 30
-            periodSeconds: 20
-            timeoutSeconds: 3
-            failureThreshold: 6
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 250m
-              memory: 1Gi
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            runAsNonRoot: true
-            seccompProfile:
-              type: RuntimeDefault
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-      volumes:
-        - name: postgresql-data
-          persistentVolumeClaim:
-            claimName: baby-blue-postgresql-data
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: baby-blue-postgresql
-  labels:
-    app: baby-blue-postgresql
-spec:
-  type: ClusterIP
-  selector:
-    app: baby-blue-postgresql
-  ports:
-    - name: postgresql
-      port: 5432
-      targetPort: postgresql
-      protocol: TCP
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -112,74 +6,147 @@ metadata:
     app: baby-blue
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: baby-blue
+
   template:
     metadata:
       labels:
         app: baby-blue
+
     spec:
       containers:
         - name: baby-blue
-          image: ghcr.io/mutanthumb/baby-blue:multi.2
+          image: ghcr.io/mutanthumb/baby-blue:multi.3
           imagePullPolicy: Always
+
           ports:
             - name: http
               containerPort: 8000
               protocol: TCP
-          envFrom:
-            - secretRef:
-                name: envsecret
+
           env:
-            - name: PGHOST
-              value: baby-blue-postgresql
-            - name: PGPORT
-              value: "5432"
-            - name: PGUSER
+            - name: SOCIAL_AUTH_GLOBUS_KEY
               valueFrom:
                 secretKeyRef:
                   name: envsecret
-                  key: POSTGRESQL_USER
-            - name: PGPASSWORD
+                  key: SOCIAL_AUTH_GLOBUS_KEY
+
+            - name: SOCIAL_AUTH_GLOBUS_SECRET
               valueFrom:
                 secretKeyRef:
                   name: envsecret
-                  key: POSTGRESQL_PASSWORD
-            - name: PGDATABASE
+                  key: SOCIAL_AUTH_GLOBUS_SECRET
+                  
+            - name: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS
+
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DJANGO_SECRET_KEY
+
+            - name: DJANGO_SETTINGS_MODULE
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DJANGO_SETTINGS_MODULE
+
+            - name: SEARCH_INDEXES_UUID_BBINDEX
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: SEARCH_INDEXES_UUID_BBINDEX
+
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DJANGO_ALLOWED_HOSTS
+
+            - name: DEBUG
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DEBUG
+
+            - name: DJANGO_LOGLEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DJANGO_LOGLEVEL
+
+            - name: DATABASE_ENGINE
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DATABASE_ENGINE
+
+            - name: POSTGRESQL_DATABASE
               valueFrom:
                 secretKeyRef:
                   name: envsecret
                   key: POSTGRESQL_DATABASE
+
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: POSTGRESQL_USER
+
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: POSTGRESQL_PASSWORD
+
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DATABASE_HOST
+
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: envsecret
+                  key: DATABASE_PORT
+
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+
+            - name: PYTHONUNBUFFERED
+              value: "1"
+
+            - name: HOME
+              value: "/tmp"
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+
           readinessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 10
+            initialDelaySeconds: 5
             periodSeconds: 10
-            timeoutSeconds: 3
-            failureThreshold: 6
-          livenessProbe:
-            tcpSocket:
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 20
-            timeoutSeconds: 3
-            failureThreshold: 3
+
           resources:
             requests:
-              cpu: 100m
+              cpu: 50m
               memory: 128Mi
             limits:
               cpu: 250m
               memory: 512Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
 
 ---
 apiVersion: v1
@@ -189,11 +156,27 @@ metadata:
   labels:
     app: baby-blue
 spec:
-  type: ClusterIP
   selector:
     app: baby-blue
   ports:
     - name: http
       port: 8000
       targetPort: http
-      protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: baby-blue
+  labels:
+    app: baby-blue
+spec:
+  to:
+    kind: Service
+    name: baby-blue
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

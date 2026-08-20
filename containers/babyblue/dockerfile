@@ -1,40 +1,70 @@
-# Stage 1: Base build stage (Unchanged)
-FROM python:3.14-slim AS builder
-RUN mkdir /app
+# syntax=docker/dockerfile:1.7
+
+ARG PYTHON_IMAGE=python:3.14-alpine
+
+# ------------------------------------------------------------
+# Builder
+# ------------------------------------------------------------
+FROM ${PYTHON_IMAGE} AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /build
+
+# Install security updates and tools required to compile Python packages.
+# Depending on requirements.txt, additional *-dev packages may be needed.
+RUN apk upgrade --no-cache \
+    && apk add --no-cache \
+        build-base \
+        libffi-dev \
+        openssl-dev
+
+COPY requirements.txt .
+
+RUN python -m pip install --upgrade pip \
+    && python -m pip wheel \
+        --wheel-dir=/build/wheels \
+        --requirement=requirements.txt
+
+
+# ------------------------------------------------------------
+# Runtime
+# ------------------------------------------------------------
+FROM ${PYTHON_IMAGE} AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    DJANGO_SETTINGS_MODULE=globus_portal_framework.settings \
+    HOME=/tmp
+
+# Alpine security updates. Do not use apt-get in an Alpine image.
+RUN apk upgrade --no-cache
+
+COPY --from=builder /build/wheels /tmp/wheels
+COPY --from=builder /build/requirements.txt /tmp/requirements.txt
+
+RUN python -m pip install \
+        --no-index \
+        --find-links=/tmp/wheels \
+        --requirement=/tmp/requirements.txt \
+    && rm -rf /tmp/wheels /tmp/requirements.txt
+
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-RUN pip install --upgrade pip
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt   
 
-# Stage 2: Production stage (Perl-Free & OpenShift Native)
-FROM ://redhat.com
+# Numeric ownership avoids useradd/adduser and supports OpenShift.
+COPY --chown=1001:0 . /app
 
-# Set the working directory
-WORKDIR /app
+# OpenShift arbitrary UIDs generally receive group 0 permissions.
+RUN chgrp -R 0 /app \
+    && chmod -R g=u /app
 
-# Set environment variables to optimize Python
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE='globus_portal_framework.settings'
-
-# Copy the Python dependencies from the builder stage into UBI's site-packages
-COPY --from=builder /usr/local/lib/python3.14/site-packages/ /opt/app-root/lib/python3.14/site-packages/
-COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
-
-# Copy application code
-COPY . .
-
-# OpenShift Security Fix: Fix ownership for arbitrary high UIDs assigned at runtime
-RUN chgrp -R 0 /app && chmod -R g=u /app
-
-# Switch to standard non-root user (OpenShift will override this with a dynamic UID, which is safe)
 USER 1001
 
-# Expose the application port
 EXPOSE 8000
 
-# Start the application using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "globus_portal_framework.wsgi:application"]
-
+CMD ["gunicorn", "--bind=0.0.0.0:8000", "--workers=3", "globus_portal_framework.wsgi:application"]
