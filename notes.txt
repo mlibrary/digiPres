@@ -3,8 +3,9 @@ Build process for openshift
 docker buildx build \
     --pull \
     --no-cache \
+    --progress=plain \
     --push \
-    --tag ghcr.io/mutanthumb/baby-blue:multi.4 \
+    --tag ghcr.io/mutanthumb/baby-blue:multipatch.1 \
     --platform linux/arm64,linux/amd64 \
     .
     
@@ -13,3 +14,11 @@ docker buildx build \
     
 oc exec deployment/baby-blue -- \
   python manage.py migrate
+  
+  
+Activate venv:
+source ./venv/bin/activate 
+
+
+Image name:
+baby-blue:multipatch.12
