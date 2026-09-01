@@ -7,3 +7,9 @@ docker buildx build \
     --tag ghcr.io/mutanthumb/baby-blue:multi.4 \
     --platform linux/arm64,linux/amd64 \
     .
+    
+    
+    
+    
+oc exec deployment/baby-blue -- \
+  python manage.py migrate

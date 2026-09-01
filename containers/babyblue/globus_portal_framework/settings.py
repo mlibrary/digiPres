@@ -14,11 +14,12 @@ import os
 from globus_portal_framework.constants import FILTER_MATCH_ALL
 from globus_portal_framework import fields
 from globus_portal_framework.fields import search_highlights, globus_app_link
+from django.core.exceptions import ImproperlyConfigured
 
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 # Load the environment variables from the .env file
-load_dotenv()
+#load_dotenv()
 
 
 
@@ -106,15 +107,6 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#login-url
 LOGIN_URL = '/login/globus'
 
-"""
-SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = [
-    {
-        'name': 'DigiPres',
-        'uuid': 'blahblah',
-    }
-]
-"""
-SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = os.environ.get("SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS")
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a , between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
@@ -126,7 +118,28 @@ SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = os.environ.get("SOCIAL_AUTH_GLOBUS_ALLOWED_G
 #)
 
 # Ensure allowed hosts accepts OpenShift routing paths
-ALLOWED_HOSTS = [os.environ.get('APP_ROUTE_HOST', '*')]
+# ALLOWED_HOSTS = [os.environ.get('APP_ROUTE_HOST', '*')]
+
+
+# Trust HTTPS information supplied by the OpenShift router.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+
+# Used by python-social-auth when constructing the OAuth callback.
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+
+ALLOWED_HOSTS = [
+    "baby-blue-mlibrary-babyblue.apps.containersprod.art2.p1.openshiftapps.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://baby-blue-mlibrary-babyblue.apps.containersprod.art2.p1.openshiftapps.com",
+]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -179,7 +192,7 @@ SOCIAL_AUTH_GLOBUS_SCOPE = [
 # Set to True to retrieve information about a user identity from the Globus
 # sessions instead of relying on a Globus OIDC userinfo endpoint.
 # NOTE! This is required for using SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS
-# SOCIAL_AUTH_GLOBUS_SESSIONS = True
+SOCIAL_AUTH_GLOBUS_SESSIONS = True
 
 # Set to a UUID of a Globus group if you want to restrict access to the portal
 # to members of the Globus group.
@@ -194,6 +207,21 @@ SOCIAL_AUTH_GLOBUS_SCOPE = [
 #         'uuid': 'f63def4d-b472-11e9-af05-0a075bc69d14'
 #     }
 # ]
+
+
+group_uuid = os.environ.get("SOCIAL_AUTH_GLOBUS_ALLOWED_GROUP_UUID")
+
+if not group_uuid:
+    raise ImproperlyConfigured(
+        "SOCIAL_AUTH_GLOBUS_ALLOWED_GROUP_UUID is not configured"
+    )
+
+SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS = [
+    {
+        "name": "DigiPres",
+        "uuid": group_uuid.strip(),
+    }
+]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 CSRF_USE_SESSIONS = True

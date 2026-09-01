@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: baby-blue
-          image: ghcr.io/mutanthumb/baby-blue:multi.3
+          image: ghcr.io/mutanthumb/baby-blue:multi.9
           imagePullPolicy: Always
 
           ports:
@@ -39,12 +39,12 @@ spec:
                 secretKeyRef:
                   name: envsecret
                   key: SOCIAL_AUTH_GLOBUS_SECRET
-                  
-            - name: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS
+            
+            - name: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUP_UUID
               valueFrom:
                 secretKeyRef:
                   name: envsecret
-                  key: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUPS
+                  key: SOCIAL_AUTH_GLOBUS_ALLOWED_GROUP_UUID
 
             - name: DJANGO_SECRET_KEY
               valueFrom:
@@ -107,16 +107,12 @@ spec:
                   key: POSTGRESQL_PASSWORD
 
             - name: DATABASE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: envsecret
-                  key: DATABASE_HOST
+              value: "postgresql"
+
 
             - name: DATABASE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: envsecret
-                  key: DATABASE_PORT
+              value: "5432"
+
 
             - name: PYTHONDONTWRITEBYTECODE
               value: "1"
