@@ -16,8 +16,7 @@ The container is here: https://github.com/mlibrary/digiPres/pkgs/container/digip
 
 Connect Baby Blue with Postgresql:
 
-oc exec deployment/baby-blue -- \
-  python manage.py migrate
+oc exec deployment/baby-blue --python manage.py migrate
 
 
 
