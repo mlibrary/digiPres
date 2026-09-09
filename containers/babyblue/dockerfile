@@ -41,11 +41,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     DJANGO_SETTINGS_MODULE=globus_portal_framework.settings \
     HOME=/tmp
 
-ARG REQUIREMENTS_SHA
-LABEL org.example.requirements-sha="${REQUIREMENTS_SHA}"
+# ARG REQUIREMENTS_SHA
+# LABEL org.example.requirements-sha="${REQUIREMENTS_SHA}"
 
 # Alpine security updates. Do not use apt-get in an Alpine image.
 RUN apk upgrade --no-cache
+RUN apk update && \
+    apk upgrade util-linux
 
 COPY --from=builder /build/wheels /tmp/wheels
 COPY --from=builder /build/requirements.txt /tmp/requirements.txt

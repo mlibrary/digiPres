@@ -1,24 +1,19 @@
+Activate venv:
+source ./venv/bin/activate
+
+
 Build process for openshift
 
-docker buildx build \
-    --pull \
-    --no-cache \
-    --progress=plain \
-    --push \
-    --tag ghcr.io/mutanthumb/baby-blue:multipatch.1 \
-    --platform linux/arm64,linux/amd64 \
-    .
+docker buildx build --no-cache --push --tag ghcr.io/mlibrary/digipres/baby-blue:multi.14 --platform linux/arm64,linux/amd64 .
     
+   
+Connect baby-blue with Postgresql:
     
-    
-    
-oc exec deployment/baby-blue -- \
-  python manage.py migrate
-  
-  
-Activate venv:
-source ./venv/bin/activate 
+oc exec deployment/baby-blue -- python manage.py migrate
 
 
-Image name:
-baby-blue:multipatch.12
+openshift:
+oc login
+
+Always check deployment.yaml for image name!!
+oc apply -f ./openshift/deployment.yaml 
