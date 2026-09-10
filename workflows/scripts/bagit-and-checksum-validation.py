@@ -252,53 +252,72 @@ def batch_bag(path_to_batch_directory):
     num_tried = 0
     num_successful = 0
 
-    # create bags directory to plop newly created bags in
-    good_bags = "good_bags"
-    bad_bags = "bad_bags"
-    try:
-        good_bags = os.path.join(path_to_batch_directory, good_bags)
-        bad_bags = os.path.join(path_to_batch_directory, bad_bags)
-        os.mkdir(good_bags)
-        os.mkdir(bad_bags)
-        print(f"{good_bags} and {bad_bags} created successfully")
-    except FileExistsError:
-        print("bags directory already created. continuing on")
-        # keep going
-        pass
-    except PermissionError:
-        print("permission denied. unable to create bags directory")
-    except Exception as e:
-        print(f"an error occurred: {e}")
+    if batch_validate_bag_structure(path_to_batch_directory) > 0:
 
+        # create bags directory to plop newly created bags in
+        good_bags = "good_bags"
+        bad_bags = "bad_bags"
+        try:
+            good_bags = os.path.join(path_to_batch_directory, good_bags)
+            bad_bags = os.path.join(path_to_batch_directory, bad_bags)
+            os.mkdir(good_bags)
+            os.mkdir(bad_bags)
+            print(f"{good_bags} and {bad_bags} created successfully")
+        except FileExistsError:
+            print("bags directory already created. continuing on")
+            # keep going
+            pass
+        except PermissionError:
+            print("permission denied. unable to create bags directory")
+        except Exception as e:
+            print(f"an error occurred: {e}")
+
+        p = Path(path_to_batch_directory)
+        # count only the folders directly inside the path
+        dir_count = sum(1 for item in p.iterdir() if item.is_dir())
+        # subtract good_bags and bad_bags
+        dir_count = dir_count - 2
+
+
+        # loop through batch of bags
+        for f in p.iterdir():
+            # check if there is a metadata file
+            if os.path.isfile(f'{f}/transfer_metadata/metadata.txt'):
+                num_tried += 1
+                print(f'bagging {num_tried} out of {dir_count} directories')
+                metadata_file = f'{f}/transfer_metadata/metadata.txt'
+                # create bag
+                is_success = create_bag(metadata_file, f, good_bags, bad_bags)
+                if is_success:
+                    num_successful += 1
+            elif 'good_bags' in str(f) or 'bad_bags' in str(f) or '.DS_Store' in str(f):
+                next
+            else:
+                print(f'{f} does not contain a valid metadata file')
+
+        print(f'{num_successful} bags successfully created out of {dir_count}')
+
+        # validate checksums
+        print("Validating checksums...")
+        batch_checksums(good_bags)
+        return True
+
+    else:
+        print("no directories with valid package structure detected")
+        return False
+
+def batch_validate_bag_structure(path_to_batch_directory):
+    num_valid = 0
     p = Path(path_to_batch_directory)
-    # count only the folders directly inside the path
-    dir_count = sum(1 for item in p.iterdir() if item.is_dir())
-    # subtract good_bags and bad_bags
-    dir_count = dir_count - 2
-
 
     # loop through batch of bags
     for f in p.iterdir():
-        # check if there is a metadata file
+        # check if metadata text file exists where expected
         if os.path.isfile(f'{f}/transfer_metadata/metadata.txt'):
-            num_tried += 1
-            print(f'bagging {num_tried} out of {dir_count} directories')
-            metadata_file = f'{f}/transfer_metadata/metadata.txt'
-            # create bag
-            is_success = create_bag(metadata_file, f, good_bags, bad_bags)
-            if is_success:
-                num_successful += 1
-        elif 'good_bags' in str(f) or 'bad_bags' in str(f) or '.DS_Store' in str(f):
-            next
+            num_valid += 1
         else:
-            print(f'{f} does not contain a valid metadata file')
-
-    print(f'{num_successful} bags successfully created out of {dir_count}')
-
-    # validate checksums
-    print("Validating checksums...")
-    batch_checksums(good_bags)
-
+            next
+    return num_valid
 
 def batch_checksums(path_to_batch_directory):
 
@@ -321,23 +340,25 @@ def batch_checksums(path_to_batch_directory):
             else:
                 call_checksum_validator(f'{f}')
     except:
-        print('invalid bag directory')
+        print('invalid batch bag directory')
 
 bag_or_checksum = input("Would you like to bag ('b') or verify checksums ('c') or create globus ingest file ('g')?: ")
 if bag_or_checksum == 'b':
 
     path_to_batch_directory = input("Enter path to batch directory: ")
-    batch_bag(path_to_batch_directory.strip("'"))
+    is_valid = batch_bag(path_to_batch_directory.strip("'"))
 
-    run_globus = input("Will you be ingesting to globus? Yes ('y') or no ('n'): ")
-    if run_globus == 'y':
-        # create globus file
-        globus = path_to_batch_directory
-        # mac click and drag strip quotations
-        batch_globus(globus.strip("'"))
+    if is_valid:
 
-    else:
-        print('thanks, all done!')
+        run_globus = input("Will you be ingesting to globus? Yes ('y') or no ('n'): ")
+        if run_globus == 'y':
+            # create globus file
+            globus = path_to_batch_directory
+            # mac click and drag strip quotations
+            batch_globus(globus.strip("'"))
+
+        else:
+            print('thanks, all done!')
 
     
 elif bag_or_checksum == 'c':
