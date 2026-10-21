@@ -4,21 +4,26 @@ import csv
 from pathlib import Path
 import os
 from unidecode import unidecode
-import shutil
-
-# digi pres globus uuid
-globus_uuid = '5d8b0f1f-e5b1-4e8c-9310-22894a7d5f00'
+import csv
 
 def create_bag(path_to_barcode_directory, path_to_metadata_file):
-
   # create metadata profile
-  with open(path_to_metadata_file, 'r', encoding='utf-8') as f:
-    metadata_prof = {}
-    full_metadata_prof = json.load(f)
+  metadata_prof = {}
 
-    # pull from already created metadata text file
+  with open(path_to_metadata_file, 'r', encoding='utf-8') as f:
+
+    # JSON
+    # full_metadata_prof = json.load(f)
+
+    # CSV
+    full_metadata_prof = {}
+    reader = csv.DictReader(f)
+    for row in reader:
+        full_metadata_prof = row
+
+    # pull from already created metadata file
     metadata_prof['BarcodeNumberIdentifier'] = full_metadata_prof['BarcodeNumberIdentifier']
-    metadata_prof['RecordsLabel'] = full_metadata_prof['RecordsLabel']
+    metadata_prof['Title'] = full_metadata_prof['Title']
     metadata_prof['AlternateTitle'] = full_metadata_prof['AlternateTitle']
     metadata_prof['OriginatingUnitDepartment'] = full_metadata_prof['OriginatingUnitDepartment']
     metadata_prof['AccessionNumberCollection'] = full_metadata_prof['AccessionNumberCollection']
